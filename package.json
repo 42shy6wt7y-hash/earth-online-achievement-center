@@ -1,6 +1,6 @@
 {
   "name": "earth-online-achievement-center",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "description": "A local-first black-gold achievement gallery for Earth Online life records.",
   "main": "server.js",

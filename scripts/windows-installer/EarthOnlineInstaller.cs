@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace EarthOnlineInstaller
@@ -11,7 +12,7 @@ namespace EarthOnlineInstaller
     internal static class Program
     {
         private const string AppName = "地球online成就中心";
-        private const string ResourceName = "EarthOnlineInstaller.payload.zip";
+        private const string PayloadResourceSuffix = "payload.zip";
 
         [STAThread]
         private static void Main()
@@ -36,7 +37,12 @@ namespace EarthOnlineInstaller
                 Directory.CreateDirectory(installRoot);
 
                 string tempZip = Path.Combine(Path.GetTempPath(), "EarthOnlineAchievementCenter-payload.zip");
-                using (Stream input = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName))
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string resourceName = assembly
+                    .GetManifestResourceNames()
+                    .FirstOrDefault(name => name.EndsWith(PayloadResourceSuffix, StringComparison.OrdinalIgnoreCase));
+
+                using (Stream input = resourceName == null ? null : assembly.GetManifestResourceStream(resourceName))
                 {
                     if (input == null) throw new InvalidOperationException("Missing embedded payload.");
                     using (FileStream output = File.Create(tempZip))
