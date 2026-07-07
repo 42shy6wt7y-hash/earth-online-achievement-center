@@ -1,12 +1,12 @@
 {
   "name": "earth-online-achievement-center",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "A local-first black-gold achievement gallery for Earth Online life records.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows-installer.ps1"
+    "build:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-csharp-installer.ps1"
   },
   "engines": {
     "node": ">=20"
