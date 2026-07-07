@@ -48,4 +48,16 @@ if (-not (Test-AppServer $port)) {
 }
 
 $url = "http://127.0.0.1:$port"
-Start-Process $url
+
+$browserCandidates = @(
+  (Join-Path $env:ProgramFiles "Google\Chrome\Application\chrome.exe"),
+  (Join-Path ${env:ProgramFiles(x86)} "Google\Chrome\Application\chrome.exe"),
+  (Join-Path $env:ProgramFiles "Microsoft\Edge\Application\msedge.exe"),
+  (Join-Path ${env:ProgramFiles(x86)} "Microsoft\Edge\Application\msedge.exe")
+) | Where-Object { $_ -and (Test-Path $_) }
+
+if ($browserCandidates.Count -gt 0) {
+  Start-Process -FilePath $browserCandidates[0] -ArgumentList $url
+} else {
+  Start-Process -FilePath "rundll32.exe" -ArgumentList "url.dll,FileProtocolHandler $url"
+}

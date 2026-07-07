@@ -39,7 +39,5 @@ $startShortcut.IconLocation = $icon
 $startShortcut.Description = $appName
 $startShortcut.Save()
 
-Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$launcher`""
-
 $doneMessage = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("5a6J6KOF5a6M5oiQ44CC5qGM6Z2i5bey5Yib5bu65b+r5o235pa55byP77yM5oiQ5bCx5qGj5qGI5Lya5L+d5a2Y5Zyo77ya"))
 [System.Windows.Forms.MessageBox]::Show("$doneMessage`n$dataRoot", $appName) | Out-Null
